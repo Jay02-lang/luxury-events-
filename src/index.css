@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-royale: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  :root {
+    --bg-light-start: #F2F3F5;
+    --bg-light-mid: #E8E9EC;
+    --bg-light-end: #FFFFFF;
+    
+    --bg-dark-start: #121316;
+    --bg-dark-mid: #1A1C20;
+    --bg-dark-end: #0D0E10;
+
+    --text-high-contrast-light: #0B0B0B; /* Obsidian Black */
+    --text-muted-light: #1A1A1A;
+
+    --text-high-contrast-dark: #fafafa;
+    --text-muted-dark: #a3a3a3;
+    
+    --gold-start: #D4AF37;
+    --gold-mid: #FFF2A7;
+    --gold-end: #AA771C;
+    
+    --red-start: #8B0000;
+    --red-mid: #FF4040;
+    --red-end: #5C0000;
+  }
+
+  html, body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-muted-light);
+    background-image: linear-gradient(to bottom, var(--bg-light-start), var(--bg-light-mid), var(--bg-light-end));
+    min-height: 100vh;
+    cursor: none;
+    overflow-x: hidden;
+  }
+  
+  .dark body {
+    color: var(--text-muted-dark);
+    background-image: linear-gradient(to bottom, var(--bg-dark-start), var(--bg-dark-mid), var(--bg-dark-end));
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-royale);
+    color: var(--text-high-contrast-light);
+    letter-spacing: 0.025em;
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: var(--text-high-contrast-dark);
+  }
+}
+
+@layer utilities {
+  .gloss-gold-text {
+    background: linear-gradient(to right, var(--gold-start), var(--gold-mid), var(--gold-end), var(--gold-mid), var(--gold-start));
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 5s linear infinite;
+  }
+
+  .gloss-red-text {
+    background: linear-gradient(to right, var(--red-start), var(--red-mid), var(--red-end), var(--red-mid), var(--red-start));
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 5s linear infinite;
+  }
+
+  .theme-text-glossy {
+    background: linear-gradient(to right, #000000, #555555, #000000, #555555, #000000);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 5s linear infinite;
+  }
+
+  .dark .theme-text-glossy {
+    background: linear-gradient(to right, #aaaaaa, #ffffff, #aaaaaa, #ffffff, #aaaaaa);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 5s linear infinite;
+  }
+
+  .gloss-gold-bg {
+    background: linear-gradient(135deg, #FFDF73, #FFF8D6, #D4AF37, #FFDF73);
+    background-size: 200% auto;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 0 25px rgba(212, 175, 55, 0.5), 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    animation: shine 3s linear infinite;
+  }
+  
+  .gloss-red-bg {
+    background: linear-gradient(135deg, var(--red-start), var(--red-mid), var(--red-end));
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 10px 30px rgba(0,0,0,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .gloss-black-bg {
+    background: linear-gradient(135deg, #333333, #555555, #111111);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 10px 30px rgba(0,0,0,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .hover-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hover-sheen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: all 0.75s;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .hover-sheen:hover::after {
+    left: 200%;
+  }
+  
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  .interactive-hover {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  .interactive-hover:hover {
+    transform: scale(1.05);
+  }
+
+  .bg-floral {
+    background-image: url('/royal_floral.png');
+    background-size: 600px;
+    background-repeat: repeat;
+    filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
+    mix-blend-mode: multiply;
+  }
+  
+  .dark .bg-floral {
+    filter: invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(1.2);
+    mix-blend-mode: screen;
+  }
+}
